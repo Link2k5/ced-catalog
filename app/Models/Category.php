@@ -11,7 +11,8 @@ class Category extends Model
 {
     use SoftDeletes, HasFactory, HasUuid;
 
-    protected $fillable = ['name', 'is_active', 'description'];
+    protected $fillable = ['name', 'description', 'is_active'];
+    protected $dates = ['deleted_at'];
     public $incrementing = false;
     protected $keyType = 'string';
 
