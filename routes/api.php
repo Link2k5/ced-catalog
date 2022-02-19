@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\GenreController;
 use Illuminate\Support\Facades\Route;
 
-Route::apiResource('categories', CategoryController::class );
+Route::apiResources([
+        'categories' => CategoryController::class,
+        'genres' => GenreController::class
+    ]
+);
