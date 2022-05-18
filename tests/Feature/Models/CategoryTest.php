@@ -3,7 +3,6 @@
 namespace Tests\Feature\Models;
 
 use App\Models\Category;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -106,6 +105,8 @@ class CategoryTest extends TestCase
     public function test_if_id_has_a_valid_uuid()
     {
         $newCategory = Category::factory()->create();
+
+        // TODO É viável colocar um cast no Model para sempre retornar uma string ao chamar o id?
         $this->assertTrue(Str::isUuid((string) $newCategory->id));
     }
 }
