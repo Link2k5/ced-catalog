@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Models;
 
 use App\Models\Category;
 use App\Models\Traits\HasUuid;
@@ -10,7 +10,6 @@ use Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
-    private $category;
 
     public function setUp() : void
     {
@@ -46,9 +45,7 @@ class CategoryTest extends TestCase
     {
         $dates = ['created_at', 'updated_at', 'deleted_at'];
 
-        foreach($dates as $date) {
-            $this->assertContains($date, $this->category->getDates());
-        }
+        $this->assertEqualsCanonicalizing($dates, $this->category->getDates());
 
         $this->assertCount(count($dates), $this->category->getDates());
     }
