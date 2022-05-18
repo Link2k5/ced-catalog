@@ -3,8 +3,10 @@
 namespace Tests\Feature\Models;
 
 use App\Models\Category;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CategoryTest extends TestCase
@@ -98,5 +100,12 @@ class CategoryTest extends TestCase
         foreach($data as $key => $value) {
             $this->assertEquals($value, $newCategory->{$key});
         }
+    }
+
+    /** @test */
+    public function test_if_id_has_a_valid_uuid()
+    {
+        $newCategory = Category::factory()->create();
+        $this->assertTrue(Str::isUuid((string) $newCategory->id));
     }
 }
