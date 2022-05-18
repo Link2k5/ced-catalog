@@ -10,16 +10,18 @@ use Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
+    private $category;
+
+    public function setUp() : void
+    {
+        parent::setUp();
+        $this->category = new Category;
+
+    }
     public function testFillable()
     {
         $fillable = ['name', 'description', 'is_active'];
-        $category = new Category();
-        $this->assertEquals($fillable, $category->getFillable());
+        $this->assertEquals($fillable, $this->category->getFillable());
     }
 
     public function testIfUsingTraits()
@@ -30,34 +32,29 @@ class CategoryTest extends TestCase
             HasUuid::class
         ];
 
-        $category_traits = array_keys(class_uses(Category::class));
+        $category_traits = array_keys(class_uses($this->category));
 
         $this->assertEquals($traits, $category_traits);
     }
 
     public function testIncrementingAttribute()
     {
-        $category = new Category();
-
-        $this->assertFalse($category->incrementing);
+        $this->assertFalse($this->category->incrementing);
     }
 
     public function testDatesAttribute()
     {
-        $category = new Category();
         $dates = ['created_at', 'updated_at', 'deleted_at'];
 
         foreach($dates as $date) {
-            $this->assertContains($date, $category->getDates());
+            $this->assertContains($date, $this->category->getDates());
         }
 
-        $this->assertCount(count($dates), $category->getDates());
+        $this->assertCount(count($dates), $this->category->getDates());
     }
 
     public function testIfKeyTypeIsAString()
     {
-        $category = new Category();
-
-        $this->assertEquals('string', $category->getKeyType());
+        $this->assertEquals('string', $this->category->getKeyType());
     }
 }
