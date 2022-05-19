@@ -100,9 +100,37 @@ class GenreTest extends TestCase
     /** @test */
     public function test_if_id_has_a_valid_uuid()
     {
-        $newGenre = Genre::factory()->create();
+        $newGenre = Genre::factory()->create()->first();
 
-        // TODO É viável colocar um cast no Model para sempre retornar uma string ao chamar o id?
-        $this->assertTrue(Str::isUuid((string) $newGenre->id));
+        $this->assertTrue(Str::isUuid($newGenre->id));
+    }
+
+    /** @test */
+    public function test_genre_can_be_deleted()
+    {
+        $newGenre = $this->genre
+            ->factory()
+            ->create()
+            ->first();
+
+        $newGenre->delete();
+
+        $this->assertNull($this->genre->find($newGenre->id));
+    }
+
+    /** @test */
+    public function test_if_genre_can_be_restored()
+    {
+        $newGenre = $this->genre
+            ->factory()
+            ->create()
+            ->first();
+
+        $newGenre->delete();
+        $this->assertNull($this->genre->find($newGenre->id));
+
+        $newGenre->restore();
+
+        $this->assertNotNull($newGenre);
     }
 }

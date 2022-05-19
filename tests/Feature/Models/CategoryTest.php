@@ -104,9 +104,36 @@ class CategoryTest extends TestCase
     /** @test */
     public function test_if_id_has_a_valid_uuid()
     {
-        $newCategory = Category::factory()->create();
+        $newCategory = Category::factory()->create()->first();
 
-        // TODO É viável colocar um cast no Model para sempre retornar uma string ao chamar o id?
-        $this->assertTrue(Str::isUuid((string) $newCategory->id));
+        $this->assertTrue(Str::isUuid($newCategory->id));
+    }
+
+    public function test_category_can_be_deleted()
+    {
+        $newCategory = $this->category
+                            ->factory()
+                            ->create()
+                            ->first();
+
+        $newCategory->delete();
+
+        $this->assertNull($this->category->find($newCategory->id));
+    }
+
+    /** @test  */
+    public function test_if_category_can_be_restored()
+    {
+        $newCategory = $this->category
+            ->factory()
+            ->create()
+            ->first();
+
+        $newCategory->delete();
+        $this->assertNull($this->category->find($newCategory->id));
+
+        $newCategory->restore();
+
+        $this->assertNotNull($newCategory);
     }
 }
