@@ -18,7 +18,6 @@ class GenreFactory extends Factory
     {
         return [
             'name' => $this->faker->country(),
-            'description' => rand(0, 10) % 2 == 0 ? $this->faker->sentence() : null,
             'is_active' => $this->faker->boolean()
         ];
     }

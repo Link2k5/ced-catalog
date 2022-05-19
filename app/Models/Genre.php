@@ -11,7 +11,7 @@ class Genre extends Model
 {
     use HasFactory, SoftDeletes, HasUuid;
 
-    protected $fillable = ['name', 'description', 'is_active'];
+    protected $fillable = ['name', 'is_active'];
     public $incrementing = false;
     protected $keyType = "string";
 }

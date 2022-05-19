@@ -35,7 +35,6 @@ class GenreTest extends TestCase
         $attributes = [
             'id',
             'name',
-            'description',
             'is_active',
             'created_at',
             'updated_at',
@@ -56,7 +55,6 @@ class GenreTest extends TestCase
     {
         $data = [
             'name' => 'Novo gênero',
-            'description' => 'Descrição do gênero',
             'is_active' => true,
         ];
         $newGenre = $this->genre->create($data);
@@ -90,7 +88,6 @@ class GenreTest extends TestCase
         $newGenre = $this->genre->factory()->create();
         $data = [
             'name' => 'Gênero atualizado',
-            'description' => 'Descrição do gênero atualizado',
             'is_active' => true,
         ];
         $newGenre->update($data);

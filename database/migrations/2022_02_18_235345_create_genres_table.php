@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('genres', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('name');
-            $table->text('description')->nullable();
             $table->boolean('is_active')->default(0);
             $table->softDeletes();
             $table->timestamps();
